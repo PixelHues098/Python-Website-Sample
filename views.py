@@ -1,12 +1,14 @@
-from flask import Blueprint
+from flask import Blueprint, render_template, request
 
 
 views = Blueprint(__name__, "views") 
 
 @views.route("/")
 def home():
-    return "home page"
+    return render_template("index.html", name="Nicko")
 
-@views.route("/home")
-def home2():
-    return "home page"
+@views.route("/profile/")
+def profile():
+    args = request.args
+    name = args.get('name')
+    return render_template("index.html", name=name)
